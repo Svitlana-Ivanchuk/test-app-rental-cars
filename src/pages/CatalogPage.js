@@ -1,10 +1,13 @@
-import { CarsList } from 'components/CarsList';
+import { CarsList } from '../components/CarList/CarsList';
 
 export default function CatalogPage() {
   return (
-    <div title="Contacts">
-      {/*<Filter></Filter>*/}
-      <CarsList></CarsList>
-    </div>
+    <>
+      <h2>Catalog</h2>
+      <div>
+        {/*<Filter></Filter>*/}
+        <CarsList></CarsList>
+      </div>
+    </>
   );
 }

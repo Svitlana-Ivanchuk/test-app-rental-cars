@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { getAllCars } from './operations';
+import { fetchCars } from './operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -15,19 +15,22 @@ const handleRejected = (state, action) => {
 const carsSlice = createSlice({
   name: 'cars',
   initialState: {
-    items: [],
+    catalog: [],
     isLoading: false,
     error: null,
   },
-  extraReducers: builder =>
+  extraReducers: builder => {
     builder
-      .addCase(getAllCars.pending, handlePending)
-      .addCase(getAllCars.fulfilled, (state, action) => {
+      .addCase(fetchCars.pending, handlePending)
+      .addCase(fetchCars.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        //state.catalog.push(...action.payload);
+        //state.catalog = action.payload;
+        return action.payload;
       })
-      .addCase(getAllCars.rejected, handleRejected),
+      .addCase(fetchCars.rejected, handleRejected);
+  },
 });
 
 const persistConfig = {
